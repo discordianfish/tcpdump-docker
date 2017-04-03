@@ -1,8 +1,9 @@
-FROM ubuntu
+FROM alpine:3.5
 MAINTAINER Johannes 'fish' Ziemke <docker@freigeist.org>
 
 VOLUME  [ "/dumps" ]
-RUN apt-get update &&  apt-get -y -q install tcpdump
+RUN apk add --update tcpdump
 
-ENTRYPOINT [ "/usr/sbin/tcpdump", "-C", "1000", "-W", "100", \
-             "-v", "-w", "/dumps/dump" ]
+ENTRYPOINT [ "/usr/sbin/tcpdump" ]
+CMD [ "-C", "1000", "-W", "100", \
+  "-v", "-w", "/dumps/dump" ]
